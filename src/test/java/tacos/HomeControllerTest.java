@@ -13,16 +13,23 @@ import org.springframework.test.web.servlet.MockMvc;
 
 
 @WebMvcTest(HomeController.class)
+/*
+WebMvcTest is an annotation provided by String to run a test in the context of Spring application. In our case
+it registers HomeController in order to us throw requests.
+ */
 public class HomeControllerTest {
 
     @Autowired
-    private MockMvc mockMcv;
+    private MockMvc mockMcv; // Object for test
 
     @Test
     public void testHomePage() throws Exception{
-        mockMcv.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("home"))
-                .andExpect(content().string(containsString("Welcome to...")));
+        /*
+        Method that define te test we aim to run.
+         */
+        mockMcv.perform(get("/")) // Object mockMcv perform a get request
+                .andExpect(status().isOk()) // AND expected result is 200(OK)
+                .andExpect(view().name("home")) // AND view should have a name 'home'
+                .andExpect(content().string(containsString("Welcome to..."))); //AND render the string "WWelcome to..."
     }
 }
